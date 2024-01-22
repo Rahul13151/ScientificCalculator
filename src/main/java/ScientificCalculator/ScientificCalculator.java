@@ -17,9 +17,7 @@ public class ScientificCalculator {
 
             return result;
         } catch (IllegalArgumentException e) {
-            // Handle the specific illegal argument exception
             System.err.println("Illegal Argument Exception: " + e.getMessage());
-            // You might log the exception or perform additional error handling here
             return Double.NaN;
         } catch (ArithmeticException e) {
             System.err.println("Arithmetic Exception: " + e.getMessage());
@@ -116,34 +114,117 @@ public class ScientificCalculator {
         }
     }
     public double squareRoot(double num){
-        return Math.sqrt(num);
+        try {
+            // Check for valid input before performing square root
+            if (Double.isInfinite(num) || Double.isNaN(num) || num<0) {
+                throw new IllegalArgumentException("Invalid input: Cannot calculate square root of a negative number.");
+            }
+            double result = Math.sqrt(num);
+
+            if (Double.isNaN(result)) {
+                throw new ArithmeticException("Result is NaN (Not a Number)");
+            }
+
+            return result;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Illegal Argument Exception: " + e.getMessage());
+            return Double.NaN;
+        } catch (ArithmeticException e) {
+            System.err.println("Arithmetic Exception: " + e.getMessage());
+            return Double.NaN;
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+            return Double.NaN;
+        }
     }
-    public double power(double num1,double num2){
-        return Math.pow(num1,num2);
+    public double power(double base, double exponent) {
+        try {
+            if (base < 0 && exponent % 1 != 0) {
+                throw new IllegalArgumentException("Invalid input: Cannot calculate fractional root of a negative number.");
+            }
+
+            double result = Math.pow(base, exponent);
+
+            if (Double.isInfinite(result)) {
+                throw new ArithmeticException("Result is infinity");
+            } else if (Double.isNaN(result)) {
+                throw new ArithmeticException("Result is NaN (Not a Number)");
+            }
+
+            return result;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Illegal Argument Exception: " + e.getMessage());
+            return Double.NaN;
+        } catch (ArithmeticException e) {
+            System.err.println("Arithmetic Exception: " + e.getMessage());
+            return Double.NaN;
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+            return Double.NaN;
+        }
     }
-    public double sinFunction(double angleInDegrees){
-        double angleInRadians = Math.toRadians(angleInDegrees);
-        return Math.sin(angleInRadians);
-    }
-    public double tanFunction(double angleInDegrees){
-        double angleInRadians = Math.toRadians(angleInDegrees);
-        return Math.tan(angleInRadians);
+    public double sin(double angleInDegrees) {
+        try {
+            double angleInRadians = Math.toRadians(angleInDegrees);
+            double result = Math.sin(angleInRadians);
+
+            if (Double.isInfinite(result)) {
+                throw new ArithmeticException("Result is infinity");
+            } else if (Double.isNaN(result)) {
+                throw new ArithmeticException("Result is NaN (Not a Number)");
+            }
+
+            return result;
+        } catch (ArithmeticException e) {
+            System.err.println("Arithmetic Exception: " + e.getMessage());
+            return Double.NaN;
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+            return Double.NaN; // or handle in a way appropriate for your application
+        }
     }
 
-//    public double divide(double num1,double num2){
-//        try {
-//            double ans = num1/num2;
-//            return ans;
-//        }
-//        catch (ArithmeticException ex) {
-//            ex.printStackTrace();
-//            System.out.println("ERROR: Divide by zero");
-//            return 0 ;
-//        }
-//    }
-    public double cosFunction(double angleInDegrees){
-        double angleInRadians = Math.toRadians(angleInDegrees);
-        return Math.cos(angleInRadians);
+    public double cos(double angleInDegrees) {
+        try {
+            double angleInRadians = Math.toRadians(angleInDegrees);
+            double result = Math.cos(angleInRadians);
+            if (Double.isInfinite(result)) {
+                throw new ArithmeticException("Result is infinity");
+            } else if (Double.isNaN(result)) {
+                throw new ArithmeticException("Result is NaN (Not a Number)");
+            }
+
+            return result;
+        } catch (ArithmeticException e) {
+            System.err.println("Arithmetic Exception: " + e.getMessage());
+            return Double.NaN;
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+            return Double.NaN;
+        }
     }
 
+    public double tan(double angleInDegrees) {
+        try {
+            double angleInRadians = Math.toRadians(angleInDegrees);
+            double result = Math.tan(angleInRadians);
+
+            if (Double.isInfinite(result)) {
+                throw new ArithmeticException("Result is infinity");
+            } else if (Double.isNaN(result)) {
+                throw new ArithmeticException("Result is NaN (Not a Number)");
+            }
+
+            return result;
+        } catch (ArithmeticException e) {
+            // Handle the specific arithmetic exception
+            System.err.println("Arithmetic Exception: " + e.getMessage());
+            // You might log the exception or perform additional error handling here
+            return Double.NaN; // or handle in a way appropriate for your application
+        } catch (Exception e) {
+            // Handle other generic exceptions
+            System.err.println("Exception: " + e.getMessage());
+            return Double.NaN; // or handle in a way appropriate for your application
+        }
+    }
 }

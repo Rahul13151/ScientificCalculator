@@ -27,7 +27,7 @@ public class ScientificCalculatorTest extends ScientificCalculator {
     }
     @Test(groups = {"basicOperations"})
     public void testDivision(){
-    // calculator = new ScientificCalculator();
+     calculator = new ScientificCalculator();
         System.out.println(calculator.divide(1,3));
 
     }
@@ -51,9 +51,16 @@ public class ScientificCalculatorTest extends ScientificCalculator {
     public void testTanFunction(){
 
     }
+    @Test
+    public void testInvalidAddition(){
+
+    }
+    @Test
+    public void testInvalidDivision(){
+
+    }
     @AfterClass
     public void tearDown(){
-        System.out.println("Log");
     }
 
 }
