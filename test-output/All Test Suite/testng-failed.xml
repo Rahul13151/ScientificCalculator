@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="1" parallel="methods" name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="1" parallel="methods" name="/home/knoldus/IdeaProjects/Scientific_Calculator(failed)">
+    <groups>
+      <run>
+        <include name="basicOperations"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="ScientificCalculatorTest">
+        <methods>
+          <include name="testDivision"/>
+          <include name="testAddition"/>
+        </methods>
+      </class> <!-- ScientificCalculatorTest -->
+    </classes>
+  </test> <!-- /home/knoldus/IdeaProjects/Scientific_Calculator(failed) -->
+</suite> <!-- Failed suite [All Test Suite] -->
