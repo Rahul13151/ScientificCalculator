@@ -1,7 +1,15 @@
 import ScientificCalculator.ScientificCalculator;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
 import org.testng.Assert;
+import org.apache.commons.csv.*;
 import org.testng.annotations.*;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class ScientificCalculatorTest extends ScientificCalculator {
@@ -12,7 +20,7 @@ public class ScientificCalculatorTest extends ScientificCalculator {
     }
 
     @Test(groups = {"basicOperations"},dataProvider = "twoParameterDataProvider",dataProviderClass = CustomDataProvider.class)
-    public void testAddition(double num1,double num2,double expectedResult){
+    public void  testAddition(double num1,double num2,double expectedResult){
      calculator = new ScientificCalculator();
         double actualResult = calculator.add(num1,num2);
         Assert.assertEquals(actualResult, expectedResult);
@@ -59,7 +67,7 @@ public class ScientificCalculatorTest extends ScientificCalculator {
     public void testInvalidDivision(){
 
     }
-    @AfterClass
+    @AfterMethod
     public void tearDown(){
     }
 

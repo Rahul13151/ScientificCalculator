@@ -1,80 +1,78 @@
+import com.opencsv.CSVReader;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.testng.annotations.DataProvider;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// METHOD 1 ======== USING OPEN CSV DEPENDENCY=============================
 public class CustomDataProvider {
-    @DataProvider(name="twoParameterDataProvider")
+    @DataProvider(name = "twoParameterDataProvider")
     public Object[][] readTestData() throws IOException {
-//        String csvFile = "./testdata.csv";
-//        String line;
-//        String csvSplitBy = ",";
-
-//        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-//            // Calculate the number of rows in the CSV file
-//            long rowCount = br.lines().count();
-//
-//            // Initialize the data array
-//            Object[][] testData = new Object[(int) rowCount - 1][3];
-//
-//            // Skip the header line
-//            br.readLine();
-//
-//            // Read data from the CSV file and populate the testData array
-//            int index = 0;
-//            while ((line = br.readLine()) != null) {
-//                String[] stringData = line.split(csvSplitBy);
-//                Double[] doubleData = new Double[stringData.length];
-//
-//                // Convert each string to a double and store it in the double array
-//                for (int i = 0; i < stringData.length; i++) {
-//                    doubleData[i] = Double.parseDouble(stringData[i]);
-//                    System.out.println(doubleData[i]);
-//                }
-//
-//                testData[index] = doubleData;
-//                index++;
-//            }
-//
-//            return testData;
-//        }
-
-//        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-//            // Calculate the number of rows in the CSV file
-//            long rowCount = br.lines().count();
-//
-//            // Initialize the data array
-//            Object[][] testData = new Object[(int) rowCount - 1][3];
-//
-//            // Skip the header line
-//            br.readLine();
-//
-//            // Read data from the CSV file and populate the testData array
-//            int index = 0;
-//            while ((line = br.readLine()) != null) {
-//                String[] data = line.split(csvSplitBy);
-//                testData[index][0] = Double.parseDouble(data[0]);  // operand1
-//                testData[index][1] = Double.parseDouble(data[1]);  // operand2
-//                testData[index][2] = Double.parseDouble(data[2]);  // expectedResult
-//                index++;
-//            }
-//
-//            return testData;
-//        }
-        List<Object[]> testData = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader("testdata.csv"));
+        String csvFile = "testdata.csv";
         String line;
-        while ((line = reader.readLine()) != null) {
-            String[] values = line.split(",");
-            double num1 = Double.parseDouble(values[0]);
-            double num2 = Double.parseDouble(values[1]);
-            double num3 = Double.parseDouble(values[2]);
-            testData.add(new Object[]{num1, num2,num3});
-        }
-        reader.close();
-        return testData.toArray(new Object[0][0]);
+        String csvSplitBy = ",";
 
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            List<Object[]> testData = new ArrayList<>();
+            br.readLine();
+            int index = 0;
+            while ((line = br.readLine()) != null) {
+                String[] stringData = line.split(csvSplitBy);
+                Double[] doubleData = new Double[stringData.length];
+
+                // Convert each string to a double and store it in the double array
+                for (int i = 0; i < stringData.length; i++) {
+                    doubleData[i] = Double.parseDouble(stringData[i]);
+                }
+                testData.add(doubleData);
+                index++;
+            }
+
+            return testData.toArray(new Object[0][0]);
+        }
     }
 }
+
+//// METHOD 2 ======== USING APACHE.COMMON DEPENDENCY=============================
+//
+//public class CustomDataProvider {
+//    @DataProvider(name="twoParameterDataProvider")
+//    public Object[][] readTestData() throws IOException {
+//        String path = "/home/knoldus/IdeaProjects/Scientific_Calculator/testdata.csv";
+//        // Create a new BufferReader object and pass the path of CSV file
+//        Reader reader = Files.newBufferedReader(Paths.get(path));
+//        // parse the file into csv values
+////        CSVParser parse = new CSVParser(reader, CSVFormat.DEFAULT);
+//        Iterable<CSVRecord> parse = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(reader);
+//        int size=0;
+//        for (CSVRecord csvRecord : parse) {
+//            size++;
+//        }
+//        Object[][] testData = new Object[(int) size][3];
+//
+//        reader = Files.newBufferedReader(Paths.get(path));
+//        parse = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(reader);
+//        int index = 0;
+//        for (CSVRecord csvRecord : parse) {
+//
+//            // Accessing Values by Column Index
+//            testData[index][0] =  Double.parseDouble(csvRecord.get("operand1"));
+//            testData[index][1] = Double.parseDouble(csvRecord.get("operand2"));
+//            testData[index][2] = Double.parseDouble(csvRecord.get("expectedResult"));
+//            index++;
+//            // print the value to console
+//
+//        }
+//        return testData;
+//
+//    }
+//}
