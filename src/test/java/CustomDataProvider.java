@@ -27,14 +27,7 @@ public class CustomDataProvider {
             int index = 0;
             while ((line = br.readLine()) != null) {
                 String[] stringData = line.split(csvSplitBy);
-                Object[] doubleData = new Object[stringData.length];
-                doubleData[0]=stringData[0];
-                // Convert each string to a double and store it in the double array
-                for (int i = 1; i < stringData.length; i++) {
-                    doubleData[i] = Double.parseDouble(stringData[i]);
-                }
-
-                testData.add(doubleData);
+                testData.add(stringData);
                 index++;
             }
 
@@ -53,14 +46,7 @@ public class CustomDataProvider {
             int index = 0;
             while ((line = br.readLine()) != null) {
                 String[] stringData = line.split(csvSplitBy);
-                Object[] doubleData = new Object[stringData.length];
-                doubleData[0]=stringData[0];
-                // Convert each string to a double and store it in the double array
-                for (int i = 1; i < stringData.length; i++) {
-                    doubleData[i] = Double.parseDouble(stringData[i]);
-                }
-
-                testData.add(doubleData);
+                testData.add(stringData);
                 index++;
             }
 

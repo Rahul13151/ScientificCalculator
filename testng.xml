@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="methods" thread-count="4">
+<suite name="All Test Suite" parallel="methods" thread-count="3">
     <test verbose="2" preserve-order="true" name="/home/knoldus/IdeaProjects/Scientific_Calculator">
         <groups>
             <run>
-                <include name="basicOperations.*"></include>
-                <include name="advancedOperations.testSquareRoot"></include>
-
+                <include name="basicOperations"/>
+                <include name="advancedOperations"/>
             </run>
         </groups>
         <classes>
             <class name="ScientificCalculatorTest">
+                <methods>
+                    <exclude name="testPower"/>
+                    <exclude name="testSinFunction"/>
+                    <exclude name="testCosFunction"/>
+                    <exclude name="testTanFunction"/>
+                </methods>
             </class>
         </classes>
-    </test></suite>
+    </test>
+</suite>
