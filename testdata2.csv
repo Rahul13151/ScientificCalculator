@@ -1,0 +1,5 @@
+operation,operand1,expectedResult
+squareRoot,16,4
+tan,0,0
+sin,0,0
+cos,0,1

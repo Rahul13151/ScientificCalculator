@@ -27,12 +27,13 @@ public class CustomDataProvider {
             int index = 0;
             while ((line = br.readLine()) != null) {
                 String[] stringData = line.split(csvSplitBy);
-                Double[] doubleData = new Double[stringData.length];
-
+                Object[] doubleData = new Object[stringData.length];
+                doubleData[0]=stringData[0];
                 // Convert each string to a double and store it in the double array
-                for (int i = 0; i < stringData.length; i++) {
+                for (int i = 1; i < stringData.length; i++) {
                     doubleData[i] = Double.parseDouble(stringData[i]);
                 }
+
                 testData.add(doubleData);
                 index++;
             }
@@ -40,6 +41,33 @@ public class CustomDataProvider {
             return testData.toArray(new Object[0][0]);
         }
     }
+    @DataProvider(name = "singleParameterDataProvider")
+    public Object[][] readTestData2() throws IOException {
+        String csvFile = "testdata2.csv";
+        String line;
+        String csvSplitBy = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            List<Object[]> testData = new ArrayList<>();
+            br.readLine();
+            int index = 0;
+            while ((line = br.readLine()) != null) {
+                String[] stringData = line.split(csvSplitBy);
+                Object[] doubleData = new Object[stringData.length];
+                doubleData[0]=stringData[0];
+                // Convert each string to a double and store it in the double array
+                for (int i = 1; i < stringData.length; i++) {
+                    doubleData[i] = Double.parseDouble(stringData[i]);
+                }
+
+                testData.add(doubleData);
+                index++;
+            }
+
+            return testData.toArray(new Object[0][0]);
+        }
+    }
+
 }
 
 //// METHOD 2 ======== USING APACHE.COMMON DEPENDENCY=============================
