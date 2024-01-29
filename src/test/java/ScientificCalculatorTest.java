@@ -17,6 +17,7 @@ public class ScientificCalculatorTest extends ScientificCalculator {
     @BeforeMethod
     public void setup(){
      calculator = new ScientificCalculator();
+     System.out.println("Test Execution Starts");
     }
 
     @Test(groups = {"basicOperations"},dataProvider = "twoParameterDataProvider",dataProviderClass = CustomDataProvider.class)
@@ -155,7 +156,7 @@ public class ScientificCalculatorTest extends ScientificCalculator {
 
     @AfterMethod
     public void tearDown(){
-
+     System.out.println("Test Execution Ends Succesfully");
     }
 
 }
